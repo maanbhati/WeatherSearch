@@ -44,4 +44,4 @@ This app uses [MVVM (Model View View-Model)] architecture.
 ### App Screen shot
 
 Breed List Fragment:
-![alt text](https://github.com/maanbhati/CatSearchApp/blob/main/breed_list.png?raw=true)
+![alt text](https://github.com/maanbhati/WeatherSearch/blob/main/WeatherData_For_Saerched_City.png?raw=true)
