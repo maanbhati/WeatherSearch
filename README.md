@@ -11,7 +11,7 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
 - [Coroutines] - For asynchronous calls
 - [FlowData] - Data objects that notify views when the state changes.
 - [ViewModel] - Stores UI-related data that isn't destroyed on UI changes.
-- [ViewBinding] - Generates a binding class for each XML layout file present in that module and allows you to more easily write code that interacts with views.
+- [ViewBinding] - Generates a binding class for activity xml layout file.
 - [Glide] - An image loading library for compose UI Android focused on smooth scrolling
 - [Mockito] - For Unit testing
 - [MockK]- For Kotlin Unit testing
