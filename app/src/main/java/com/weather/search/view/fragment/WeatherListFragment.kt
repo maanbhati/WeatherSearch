@@ -1,10 +1,6 @@
 package com.weather.search.view.fragment
 
 import android.annotation.SuppressLint
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,14 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -49,41 +42,32 @@ import com.weather.search.viewmodel.WeatherListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class WeatherListFragment : Fragment() {
+class WeatherListFragment : BaseComposeFragment() {
 
     private lateinit var viewModelWeather: WeatherListViewModel
 
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
-            // Dispose of the Composition when the view's LifecycleOwner is destroyed
-            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
-            setContent {
-                WeatherSearchTheme {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colors.background
-                    ) {
-                        viewModelWeather = viewModel()
-                        Scaffold(
-                            topBar = { SearchAppBar(viewModel = viewModelWeather) }
-                        ) {
-                            val isLoadingContentState by viewModelWeather.isLoadingContentState.collectAsStateWithLifecycle()
-                            val isErrorContentState by viewModelWeather.isErrorContentState.collectAsStateWithLifecycle()
-                            val successContentState by viewModelWeather.successContentState.collectAsStateWithLifecycle()
+    @Composable
+    override fun ComposeContent() {
+        WeatherSearchTheme {
+            Surface(
+                modifier = Modifier.fillMaxSize(),
+                color = MaterialTheme.colors.background
+            ) {
+                viewModelWeather = viewModel()
+                Scaffold(
+                    topBar = { SearchAppBar(viewModel = viewModelWeather) }
+                ) {
+                    val isLoadingContentState by viewModelWeather.isLoadingContentState.collectAsStateWithLifecycle()
+                    val isErrorContentState by viewModelWeather.isErrorContentState.collectAsStateWithLifecycle()
+                    val successContentState by viewModelWeather.successContentState.collectAsStateWithLifecycle()
 
-                            if (isLoadingContentState) {
-                                LoadingScreen()
-                            }
-                            successContentState?.let { SuccessScreen(it) }
-                            if (isErrorContentState) {
-                                ErrorScreen()
-                            }
-                        }
+                    if (isLoadingContentState) {
+                        LoadingScreen()
+                    }
+                    successContentState?.let { SuccessScreen(it) }
+                    if (isErrorContentState) {
+                        ErrorScreen()
                     }
                 }
             }
