@@ -18,7 +18,7 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
 - [MockK]- For Kotlin Unit testing
 - [Espresso] - For UI instrumentation testing
 - [Modularization]- App is using network module as modularization approach in Android.
-- [Clean Architecture]- App is using clean architecture approach described in Android doc.
+- [Clean Architecture]- App is using clean architecture approach as described in Android doc.
 
   [ViewModel]: <https://developer.android.com/topic/libraries/architecture/viewmodel>
   [Hilt-Dagger]: <https://dagger.dev/hilt/>
