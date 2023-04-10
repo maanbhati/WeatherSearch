@@ -19,7 +19,6 @@ android {
         versionName = rootProject.appVersionName
 
         testInstrumentationRunner = "com.weather.search.CustomTestRunner"
-      //  testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
