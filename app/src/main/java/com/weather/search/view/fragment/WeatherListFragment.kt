@@ -52,6 +52,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class WeatherListFragment : Fragment() {
 
     private lateinit var viewModelWeather: WeatherListViewModel
+
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreateView(
         inflater: LayoutInflater,
