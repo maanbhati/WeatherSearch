@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherSearch</string>
+    <string name="search_hint">Search weather by city name…</string>
+    <string name="lorem_ipsum">Lorem ipsum</string>
+    <string name="min_max_temperature"> H - %s\u2103, L - %s\u2103</string>
+    <string name="day_temperature">%s\u2103</string>
+    <string name="error_message">We are experiencing some problem at the moment, please try again.</string>
+</resources>

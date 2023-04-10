@@ -1,0 +1,147 @@
+plugins {
+    id('com.android.application')
+    id('com.google.dagger.hilt.android')
+    id('org.jetbrains.kotlin.android')
+    id('androidx.navigation.safeargs.kotlin')
+    id('kotlin-kapt')
+    id('kotlin-parcelize')
+}
+
+android {
+    namespace = 'com.weather.search'
+    compileSdk = rootProject.compileSdkVersion
+
+    defaultConfig {
+        applicationId = "com.weather.search"
+        minSdk = rootProject.minSdkVersion
+        targetSdk = rootProject.targetSdkVersion
+        versionCode = rootProject.appVersionCode
+        versionName = rootProject.appVersionName
+
+        testInstrumentationRunner = "com.weather.search.CustomTestRunner"
+      //  testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    viewBinding {
+        enabled = true
+    }
+    kotlinOptions {
+        jvmTarget = jvmTargetVersion
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = rootProject.kotlinCompilerVersion
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+    hilt {
+        enableTransformForLocalTests = true
+    }
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+}
+
+dependencies {
+    //Network module dependency
+    implementation project(path: ':networkmodule')
+
+    implementation("androidx.core:core-ktx:$coreKtxVersion")
+    implementation("androidx.activity:activity-compose:$activityComposeVersion")
+
+    implementation("androidx.appcompat:appcompat:$appCompatVersion")
+    // For loading and tinting drawables on older versions of the platform
+    implementation("androidx.appcompat:appcompat-resources:$appCompatVersion")
+
+    // Card view dependency
+    implementation("androidx.cardview:cardview:$cardViewVersion")
+
+    // View model dependency
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModelLifecycleVersion")
+
+    // OkHttp3 dependency
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttpIntercepterVersion"
+
+    // Retrofit dependency
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+
+    // Gson converter dependency
+    implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //Hilt dependency
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-compiler:$hiltVersion")
+
+    //Room dependency
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    //Glide dependency
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    kapt "com.github.bumptech.glide:compiler:$glideVersion"
+
+    // Lifecycle Observer dependency
+    implementation("androidx.lifecycle:lifecycle-common-java8:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-process:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
+
+    implementation("androidx.compose.ui:ui:$composeUiVersion")
+    implementation("androidx.compose.ui:ui-tooling-preview:$composeUiVersion")
+    implementation("androidx.compose.material:material:$materialDesignVersion")
+    implementation("com.github.bumptech.glide:compose:1.0.0-alpha.3")
+
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationComponentVersion")
+
+    // Feature module Support
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$navigationComponentVersion")
+
+    // Jetpack Compose Integration
+    implementation("androidx.navigation:navigation-compose:$navigationComponentVersion")
+
+    // Testing Dependency
+    testImplementation "junit:junit:$jUnitVersion"
+    androidTestImplementation("androidx.test.ext:junit:$extJUnitVersion")
+    testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
+    testImplementation "io.mockk:mockk:$mockKVersion"
+    testImplementation "org.mockito:mockito-core:$mockitiCoreVersion"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineTestVersion"
+    androidTestImplementation "androidx.test.ext:junit:$extJUnitVersion"
+    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test:core-ktx:$testKtxVersion"
+    debugImplementation "androidx.fragment:fragment-testing:$fragmentTestingVersion"
+    // Hilt Testing dependency
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltTestingVersion"
+
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeUiVersion")
+    debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
+    // For instrumentation tests
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:$hiltVersion")
+    // Testing Navigation
+    androidTestImplementation("androidx.navigation:navigation-testing:$navigationComponentVersion")
+}
