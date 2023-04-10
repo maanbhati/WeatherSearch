@@ -9,7 +9,6 @@ import com.weather.network.dto.FutureWeatherResponse
 import javax.inject.Inject
 
 class ModelConverter @Inject constructor() {
-
     fun convertFromDomainToEntityModel(
         currentWeatherResponse: CurrentWeatherResponse,
         futureWeatherResponse: FutureWeatherResponse

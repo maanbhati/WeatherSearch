@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
-
     @Provides
     @Singleton
     fun provideWeatherDRepository(api: Api, weatherDao: WeatherDao): WeatherRepository {

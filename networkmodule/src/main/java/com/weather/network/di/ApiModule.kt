@@ -3,6 +3,7 @@ package com.weather.network.di
 import android.util.Log
 import com.weather.network.api.Api
 import com.weather.network.api.Api.Companion.BASE_URL
+import com.weather.network.api.GzipRequestInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,7 +39,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+    fun provideOkHttpClient(loggingInterceptor: GzipRequestInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(5, TimeUnit.MINUTES)
             .writeTimeout(5, TimeUnit.MINUTES)
@@ -46,6 +47,12 @@ class ApiModule {
             .addInterceptor(loggingInterceptor)
             .connectionSpecs(Collections.singletonList(spec))
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGzipRequestInterceptor(): GzipRequestInterceptor {
+        return GzipRequestInterceptor()
     }
 
     @Provides
