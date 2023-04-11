@@ -5,7 +5,7 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
 
 ### Build With 🏗️
 - [Kotlin] - Programming language for Android
-- [Hilt-Dagger] - Standard library to incorporate Dagger dependency injection into an Android application.
+- [Hilt] - Standard library to incorporate Hilt dependency injection into an Android application.
 - [Retrofit] -  A type-safe HTTP client for Android and Kotlin.
 - [Room] - SQLite object mapping library.
 - [Coroutines] - For asynchronous calls
@@ -19,7 +19,7 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
 - [Clean Architecture]- App is using clean architecture approach as described in Android doc.
 
   [ViewModel]: <https://developer.android.com/topic/libraries/architecture/viewmodel>
-  [Hilt-Dagger]: <https://dagger.dev/hilt/>
+  [Hilt]: <https://dagger.dev/hilt/>
   [DataStore]: <https://developer.android.com/topic/libraries/architecture/datastore>
   [ViewBinding]: <https://developer.android.com/topic/libraries/view-binding>
   [Compose UI]: <https://developer.android.com/jetpack/androidx/releases/compose-ui>
