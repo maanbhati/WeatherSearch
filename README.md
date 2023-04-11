@@ -11,7 +11,6 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
 - [Coroutines] - For asynchronous calls
 - [FlowData] - Data objects that notify views when the state changes.
 - [ViewModel] - Stores UI-related data that isn't destroyed on UI changes.
-- [ViewBinding] - Generates a binding class for activity xml layout file.
 - [Compose UI] - Jetpack Compose UI framework for writing composable UI for Android app's.
 - [Glide] - An image loading library for compose UI Android focused on smooth scrolling
 - [MockK]- For Kotlin Unit testing
@@ -21,7 +20,6 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
   [ViewModel]: <https://developer.android.com/topic/libraries/architecture/viewmodel>
   [Hilt]: <https://dagger.dev/hilt/>
   [DataStore]: <https://developer.android.com/topic/libraries/architecture/datastore>
-  [ViewBinding]: <https://developer.android.com/topic/libraries/view-binding>
   [Compose UI]: <https://developer.android.com/jetpack/androidx/releases/compose-ui>
   [FlowData]: <https://developer.android.com/kotlin/flow>
   [Retrofit]: <https://square.github.io/retrofit/>
