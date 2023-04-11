@@ -1,5 +1,5 @@
 # WeatherSearch
-### A simple Weather Search app, performed the search by city name, using MVVM clean Architecture.
+### A simple Weather Search app, performed the search by city name, using clean Architecture approach with MVVM.
 The App is using the [Open Weather Api] for searching weather data by it's name.<br/>
 Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID constant inside WeatherSearch app.
 
