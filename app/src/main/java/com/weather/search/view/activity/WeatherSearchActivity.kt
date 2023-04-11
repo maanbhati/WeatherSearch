@@ -47,12 +47,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class WeatherSearchActivity : ComponentActivity() {
 
-    private lateinit var viewModelWeather: WeatherListViewModel
-
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        lateinit var viewModelWeather: WeatherListViewModel
         setContent {
             WeatherSearchTheme {
                 Surface(
