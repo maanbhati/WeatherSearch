@@ -14,9 +14,7 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
 - [ViewBinding] - Generates a binding class for activity xml layout file.
 - [Compose UI] - Jetpack Compose UI framework for writing composable UI for Android app's.
 - [Glide] - An image loading library for compose UI Android focused on smooth scrolling
-- [Mockito] - For Unit testing
 - [MockK]- For Kotlin Unit testing
-- [Espresso] - For UI instrumentation testing
 - [Modularization]- App is using network module as modularization approach in Android.
 - [Clean Architecture]- App is using clean architecture approach as described in Android doc.
 
@@ -35,9 +33,7 @@ Get Your [Api Key] for running the WeatherSearch, Assign your api key to APP_ID 
   [Open Weather Api]: <https://openweathermap.org/current>
   [Api Key]:  <https://home.openweathermap.org/api_keys>
   [Room]: <https://developer.android.com/training/data-storage/room/>
-  [Mockito]:  <https://site.mockito.org/?>
   [MockK]:  <https://mockk.io/>
-  [Espresso]: <https://developer.android.com/training/testing/espresso>
   [Modularization]: <https://developer.android.com/topic/modularization>
   [Clean Architecture]: <https://developer.android.com/topic/architecture>
 

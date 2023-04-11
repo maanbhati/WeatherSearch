@@ -18,7 +18,7 @@ android {
         versionCode = rootProject.appVersionCode
         versionName = rootProject.appVersionName
 
-        testInstrumentationRunner = "com.weather.search.CustomTestRunner"
+         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -33,9 +33,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    viewBinding {
-        enabled = true
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
@@ -124,23 +121,13 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:$extJUnitVersion")
     testImplementation "androidx.arch.core:core-testing:$coreTestingVersion"
     testImplementation "io.mockk:mockk:$mockKVersion"
-    testImplementation "org.mockito:mockito-core:$mockitiCoreVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineTestVersion"
-    androidTestImplementation "androidx.test.ext:junit:$extJUnitVersion"
-    androidTestImplementation "org.mockito:mockito-android:$mockitoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
     androidTestImplementation "androidx.test:core-ktx:$testKtxVersion"
-    debugImplementation "androidx.fragment:fragment-testing:$fragmentTestingVersion"
+
     // Hilt Testing dependency
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltTestingVersion"
 
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeUiVersion")
     debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
-    // For instrumentation tests
-    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
-    kaptAndroidTest("com.google.dagger:hilt-compiler:$hiltVersion")
-    // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:$navigationComponentVersion")
 }
