@@ -46,4 +46,4 @@ This app uses [MVVM (Model View View-Model)] architecture.
 ### App Screen shot
 
 Weather Search Screen:
-![alt text](https://github.com/maanbhati/WeatherSearch/blob/main/WeatherData_For_Saerched_City.png?raw=true)
+![alt text](https://github.com/maanbhati/WeatherSearch/blob/main/Weather_data_for_searched_city.png?raw=true)
