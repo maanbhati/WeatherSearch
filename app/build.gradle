@@ -109,9 +109,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationComponentVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationComponentVersion")
 
-    // Feature module Support
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$navigationComponentVersion")
-
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$navigationComponentVersion")
 
@@ -122,11 +119,11 @@ dependencies {
     testImplementation "io.mockk:mockk:$mockKVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutineTestVersion"
     androidTestImplementation "androidx.test:core-ktx:$testKtxVersion"
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeUiVersion")
+    debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
 
     // Hilt Testing dependency
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltTestingVersion"
 
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeUiVersion")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
 }
