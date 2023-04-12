@@ -28,6 +28,3 @@ fun WeatherSearchScreen(viewModelWeather: WeatherListViewModel = viewModel()) {
         }
     }
 }
-
-
-
