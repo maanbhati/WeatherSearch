@@ -28,7 +28,7 @@ class WeatherListViewModel @Inject constructor(
     val isLoadingContentState: StateFlow<Boolean>
         get() = _isLoadingContentState
 
-    private val _isErrorContentState = MutableStateFlow(true)
+    private val _isErrorContentState = MutableStateFlow(false)
     val isErrorContentState: StateFlow<Boolean>
         get() = _isErrorContentState
 
@@ -109,15 +109,25 @@ class WeatherListViewModel @Inject constructor(
                 _isErrorContentState.value = false
                 _successContentState.value = null
             }
+
             SUCCESS -> {
                 _isLoadingContentState.value = false
                 _isErrorContentState.value = false
                 _successContentState.value = weatherState.data
             }
+
             ERROR -> {
                 _isLoadingContentState.value = false
                 _isErrorContentState.value = true
+                _successContentState.value = null
             }
         }
     }
+
+    /*   private fun <T> Flow<T>.catchError(): Flow<T> {
+           return catch {
+               onResource(Resource.error())
+           }
+       }*/
+
 }

@@ -1,6 +1,7 @@
 package com.weather.search.view.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -23,10 +24,10 @@ import com.weather.search.utils.getDate
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun WeatherListItem(dailyDomain: DailyDomainViewModel) {
+fun WeatherListItem(dailyDomain: DailyDomainViewModel, onClick: () -> Unit) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small)),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().clickable { onClick() }
     ) {
         Box(
             modifier = Modifier

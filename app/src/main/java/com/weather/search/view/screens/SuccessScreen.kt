@@ -1,22 +1,27 @@
 package com.weather.search.view.screens
 
+import android.os.Bundle
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.weather.network.api.Api
 import com.weather.search.R
 import com.weather.search.data.remote.WeatherDomainViewModel
 import com.weather.search.utils.getDate
+import com.weather.search.view.activity.DetailsActivity
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -69,7 +74,7 @@ fun SuccessScreen(successContentState: WeatherDomainViewModel) {
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium))
         ) {
             items(items = successContentState.daily) { daily ->
-                WeatherListItem(dailyDomain = daily)
+                WeatherListItem(dailyDomain = daily) {}
             }
         }
     }
