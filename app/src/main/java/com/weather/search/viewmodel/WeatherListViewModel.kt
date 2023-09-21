@@ -4,48 +4,40 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.weather.network.dto.CurrentWeatherResponse
 import com.weather.network.dto.FutureWeatherResponse
+import com.weather.search.core.UiState
 import com.weather.search.data.helper.ModelConverter
 import com.weather.search.data.local.WeatherEntityModel
-import com.weather.search.data.remote.Resource
 import com.weather.search.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import com.weather.search.data.remote.Resource.Status.LOADING
-import com.weather.search.data.remote.Resource.Status.ERROR
-import com.weather.search.data.remote.Resource.Status.SUCCESS
 import com.weather.search.data.remote.WeatherDomainViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 
 @HiltViewModel
 class WeatherListViewModel @Inject constructor(
     private val weatherRepositoryImpl: WeatherRepository,
     private val modelConverter: ModelConverter
 ) : ViewModel() {
-
-    private val _isLoadingContentState = MutableStateFlow(true)
-    val isLoadingContentState: StateFlow<Boolean>
-        get() = _isLoadingContentState
-
-    private val _isErrorContentState = MutableStateFlow(false)
-    val isErrorContentState: StateFlow<Boolean>
-        get() = _isErrorContentState
-
-    private val _successContentState =
-        MutableStateFlow<WeatherDomainViewModel?>(null)
-    val successContentState: StateFlow<WeatherDomainViewModel?>
-        get() = _successContentState
+    private val _uiState = MutableStateFlow<UiState<WeatherDomainViewModel?>>(UiState.Loading)
+    val uiState: StateFlow<UiState<WeatherDomainViewModel?>> = _uiState
 
     init {
         getSavedWeather()
     }
 
     fun fetchWeatherData(query: String) = viewModelScope.launch {
-        onResource(Resource.loading())
+        _uiState.value = UiState.Loading
         weatherRepositoryImpl.getCurrentWeather(query).flowOn(Dispatchers.IO)
-            .catch { onResource(Resource.error()) }
-            .collect { currentWeather -> currentWeather?.let { getFutureWeather(currentWeather) } }
+            .catch { exception ->
+                _uiState.value = UiState.Error(exception.toString())
+            }.collect { currentWeather ->
+                currentWeather?.let { getFutureWeather(currentWeather) }
+            }
     }
 
     private suspend fun getFutureWeather(currentWeatherResponse: CurrentWeatherResponse) {
@@ -53,8 +45,9 @@ class WeatherListViewModel @Inject constructor(
             currentWeatherResponse.coord.lat.toString(),
             currentWeatherResponse.coord.lon.toString()
         ).flowOn(Dispatchers.IO)
-            .catch { onResource(Resource.error()) }
-            .collect { futureWeatherResponse ->
+            .catch { exception ->
+                _uiState.value = UiState.Error(exception.toString())
+            }.collect { futureWeatherResponse ->
                 futureWeatherResponse?.let {
                     handleWeatherResponse(currentWeatherResponse, futureWeatherResponse)
                 }
@@ -67,21 +60,15 @@ class WeatherListViewModel @Inject constructor(
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val weatherEntityModel =
-                    modelConverter.convertFromDomainToEntityModel(
-                        currentWeatherResponse,
-                        futureWeatherResponse
-                    )
-                updateWeatherData(weatherEntityModel)
-                onResource(
-                    Resource.success(
-                        modelConverter.convertEntityToDomainModel(
-                            weatherEntityModel
-                        )
-                    )
+                val weatherEntityModel = modelConverter.convertFromDomainToEntityModel(
+                    currentWeatherResponse,
+                    futureWeatherResponse
                 )
+                updateWeatherData(weatherEntityModel)
+                _uiState.value =
+                    UiState.Success(modelConverter.convertEntityToDomainModel(weatherEntityModel))
             } catch (error: Exception) {
-                onResource(Resource.error(error.message))
+                _uiState.value = UiState.Error(error.toString())
             }
         }
     }
@@ -93,35 +80,15 @@ class WeatherListViewModel @Inject constructor(
         }
 
     fun getSavedWeather() = viewModelScope.launch {
-        onResource(Resource.loading())
+        _uiState.value = UiState.Loading
         weatherRepositoryImpl.getSavedWeather().flowOn(Dispatchers.IO)
-            .catch { onResource(Resource.error()) }
-            .collect {
+            .catch { exception ->
+                _uiState.value = UiState.Error(exception.toString())
+            }.collect {
                 val weatherDomainModel = modelConverter.convertEntityToDomainModel(it)
-                onResource(Resource.success(weatherDomainModel))
+                //onResource(Resource.success(weatherDomainModel))
+                _uiState.value = UiState.Success(weatherDomainModel)
             }
-    }
-
-    private fun onResource(weatherState: Resource<WeatherDomainViewModel>) {
-        when (weatherState.status) {
-            LOADING -> {
-                _isLoadingContentState.value = true
-                _isErrorContentState.value = false
-                _successContentState.value = null
-            }
-
-            SUCCESS -> {
-                _isLoadingContentState.value = false
-                _isErrorContentState.value = false
-                _successContentState.value = weatherState.data
-            }
-
-            ERROR -> {
-                _isLoadingContentState.value = false
-                _isErrorContentState.value = true
-                _successContentState.value = null
-            }
-        }
     }
 
     /*   private fun <T> Flow<T>.catchError(): Flow<T> {

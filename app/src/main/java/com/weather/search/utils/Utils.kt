@@ -1,7 +1,8 @@
 package com.weather.search.utils
 
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * Return date in specified format.

@@ -1,10 +1,10 @@
 buildscript {
     ext {
-        composeUiVersion = '1.4.1'
+        composeUiVersion = '1.5.1'
         // Sdk versions
-        compileSdkVersion = 33
+        compileSdkVersion = 34
         minSdkVersion = 26
-        targetSdkVersion = 33
+        targetSdkVersion = 34
         appVersionCode = 1
         appVersionName = "1.0"
 
@@ -12,20 +12,20 @@ buildscript {
         jvmTargetVersion = '17'
 
         // App dependencies versions
-        coreKtxVersion = '1.10.0'
+        coreKtxVersion = '1.12.0'
         appCompatVersion = '1.6.1'
-        materialDesignVersion = '1.4.1'
+        materialDesignVersion = '1.5.1'
         cardViewVersion = '1.0.0'
-        viewModelLifecycleVersion = '2.4.0'
+        viewModelLifecycleVersion = '2.6.2'
         retrofitVersion = '2.9.0'
         okHttpIntercepterVersion = '4.10.0'
         gsonVersion = '2.9.0'
         hiltVersion = '2.45'
-        roomVersion = '2.5.1'
+        roomVersion = '2.5.2'
         glideVersion = '4.14.2'
-        navigationComponentVersion = '2.5.3'
+        navigationComponentVersion = '2.7.3'
         lifecycleVersion = '2.6.1'
-        activityComposeVersion = '1.7.0'
+        activityComposeVersion = '1.7.2'
         kotlinCompilerVersion = '1.4.4'
 
         // Testing dependency
@@ -45,8 +45,8 @@ buildscript {
 }
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '8.0.0' apply false
-    id 'com.android.library' version '8.0.0' apply false
+    id 'com.android.application' version '8.1.1' apply false
+    id 'com.android.library' version '8.1.1' apply false
     id 'org.jetbrains.kotlin.android' version '1.8.10' apply false
     id 'com.google.dagger.hilt.android' version '2.45' apply false
     id 'org.jetbrains.kotlin.plugin.parcelize' version '1.8.10' apply false
