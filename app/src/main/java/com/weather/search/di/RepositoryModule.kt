@@ -1,6 +1,8 @@
 package com.weather.search.di
 
 import com.weather.network.api.Api
+import com.weather.search.core.DefaultDispatcherProvider
+import com.weather.search.core.DispatcherProvider
 import com.weather.search.data.local.WeatherDao
 import com.weather.search.repository.WeatherRepository
 import com.weather.search.repository.WeatherRepositoryImpl
@@ -15,7 +17,13 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideWeatherDRepository(api: Api, weatherDao: WeatherDao): WeatherRepository {
+    fun provideWeatherRepository(api: Api, weatherDao: WeatherDao): WeatherRepository {
         return WeatherRepositoryImpl(api, weatherDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDispatcher(): DispatcherProvider {
+        return DefaultDispatcherProvider()
     }
 }

@@ -4,12 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.weather.network.dto.CurrentWeatherResponse
 import com.weather.network.dto.FutureWeatherResponse
+import com.weather.search.core.DispatcherProvider
 import com.weather.search.core.UiState
 import com.weather.search.data.helper.ModelConverter
 import com.weather.search.data.local.WeatherEntityModel
 import com.weather.search.repository.WeatherRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import com.weather.search.data.remote.WeatherDomainViewModel
@@ -21,7 +21,8 @@ import kotlinx.coroutines.flow.flowOn
 @HiltViewModel
 class WeatherListViewModel @Inject constructor(
     private val weatherRepositoryImpl: WeatherRepository,
-    private val modelConverter: ModelConverter
+    private val modelConverter: ModelConverter,
+    private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState<WeatherDomainViewModel?>>(UiState.Loading)
     val uiState: StateFlow<UiState<WeatherDomainViewModel?>> = _uiState
@@ -32,7 +33,7 @@ class WeatherListViewModel @Inject constructor(
 
     fun fetchWeatherData(query: String) = viewModelScope.launch {
         _uiState.value = UiState.Loading
-        weatherRepositoryImpl.getCurrentWeather(query).flowOn(Dispatchers.IO)
+        weatherRepositoryImpl.getCurrentWeather(query).flowOn(dispatcherProvider.io)
             .catch { exception ->
                 _uiState.value = UiState.Error(exception.toString())
             }.collect { currentWeather ->
@@ -44,7 +45,7 @@ class WeatherListViewModel @Inject constructor(
         weatherRepositoryImpl.getFutureWeather(
             currentWeatherResponse.coord.lat.toString(),
             currentWeatherResponse.coord.lon.toString()
-        ).flowOn(Dispatchers.IO)
+        ).flowOn(dispatcherProvider.io)
             .catch { exception ->
                 _uiState.value = UiState.Error(exception.toString())
             }.collect { futureWeatherResponse ->
@@ -58,7 +59,7 @@ class WeatherListViewModel @Inject constructor(
         currentWeatherResponse: CurrentWeatherResponse,
         futureWeatherResponse: FutureWeatherResponse
     ) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcherProvider.io) {
             try {
                 val weatherEntityModel = modelConverter.convertFromDomainToEntityModel(
                     currentWeatherResponse,
@@ -74,14 +75,14 @@ class WeatherListViewModel @Inject constructor(
     }
 
     suspend fun updateWeatherData(weatherEntityModel: WeatherEntityModel) =
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcherProvider.io) {
             weatherRepositoryImpl.deleteAllWeather()
             weatherRepositoryImpl.insertWeather(weatherEntityModel)
         }
 
     fun getSavedWeather() = viewModelScope.launch {
         _uiState.value = UiState.Loading
-        weatherRepositoryImpl.getSavedWeather().flowOn(Dispatchers.IO)
+        weatherRepositoryImpl.getSavedWeather().flowOn(dispatcherProvider.io)
             .catch { exception ->
                 _uiState.value = UiState.Error(exception.toString())
             }.collect {
@@ -91,10 +92,9 @@ class WeatherListViewModel @Inject constructor(
             }
     }
 
-    /*   private fun <T> Flow<T>.catchError(): Flow<T> {
+    /*private fun <T> Flow<T>.catchError(): Flow<T> {
            return catch {
                onResource(Resource.error())
            }
        }*/
-
 }
