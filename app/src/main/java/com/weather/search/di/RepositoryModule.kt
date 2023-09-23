@@ -1,7 +1,7 @@
 package com.weather.search.di
 
 import com.weather.network.api.Api
-import com.weather.search.core.DefaultDispatcherProvider
+import com.weather.search.core.DispatcherProviderImpl
 import com.weather.search.core.DispatcherProvider
 import com.weather.search.data.local.WeatherDao
 import com.weather.search.repository.WeatherRepository
@@ -24,6 +24,6 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideDispatcher(): DispatcherProvider {
-        return DefaultDispatcherProvider()
+        return DispatcherProviderImpl()
     }
 }

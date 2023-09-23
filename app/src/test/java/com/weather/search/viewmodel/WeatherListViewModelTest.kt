@@ -3,6 +3,7 @@ package com.weather.search.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.weather.network.dto.CurrentWeatherResponse
 import com.weather.search.MainCoroutineTestRule
+import com.weather.search.TestDispatcherProvider
 import com.weather.search.core.DispatcherProvider
 import com.weather.search.data.helper.ModelConverter
 import com.weather.search.data.local.WeatherEntityModel
@@ -47,6 +48,7 @@ class WeatherListViewModelTest {
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxed = true)
+        dispatcherProvider = TestDispatcherProvider()
         viewModel = WeatherListViewModel(repository, modelConverter, dispatcherProvider)
     }
 
