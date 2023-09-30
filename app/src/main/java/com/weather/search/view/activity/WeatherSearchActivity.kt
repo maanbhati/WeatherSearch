@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.core.view.WindowCompat
 import com.weather.search.ui.theme.WeatherSearchTheme
 import com.weather.search.view.screens.WeatherSearchScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +17,8 @@ class WeatherSearchActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Displaying edge-to-edge
+       // WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             WeatherSearchTheme {
                 Surface(
