@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        composeUiVersion = '1.5.1'
+        composeUiVersion = '1.5.2'
         // Sdk versions
         compileSdkVersion = 34
         minSdkVersion = 26

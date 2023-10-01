@@ -17,7 +17,7 @@ android {
         versionCode = rootProject.appVersionCode
         versionName = rootProject.appVersionName
 
-         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -126,5 +126,4 @@ dependencies {
 
     // Hilt Testing dependency
     kaptAndroidTest "com.google.dagger:hilt-android-compiler:$hiltTestingVersion"
-
 }
