@@ -33,12 +33,15 @@ fun SuccessScreenPreview() {
         "",
         listOf()
     )
-    SuccessScreen(successContent)
+    SuccessScreen(navigateToDetailScreen = {}, successContent)
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun SuccessScreen(successContentState: WeatherDomainViewModel) {
+fun SuccessScreen(
+    navigateToDetailScreen: (weatherDetail: String) -> Unit,
+    successContentState: WeatherDomainViewModel
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -90,6 +93,7 @@ fun SuccessScreen(successContentState: WeatherDomainViewModel) {
             itemsIndexed(items = successContentState.daily) { index, daily ->
                 WeatherListItem(dailyDomain = daily) {
                     println("item clicked ${index + 1}")
+                    navigateToDetailScreen(successContentState.description)
                 }
             }
         }

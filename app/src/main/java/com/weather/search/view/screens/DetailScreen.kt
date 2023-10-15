@@ -1,6 +1,7 @@
 package com.weather.search.view.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,12 +19,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.weather.search.R
 
 @Composable
-fun DetailScreen(item: Int) {
+fun DetailScreen(onClick: () -> Unit, item: String) {
     Row(
         modifier = Modifier
             .background(colorResource(id = R.color.color_light_gray))
             .fillMaxWidth()
-            .padding(dimensionResource(id = R.dimen.spacing_small)),
+            .padding(dimensionResource(id = R.dimen.spacing_small))
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
@@ -40,5 +42,5 @@ fun DetailScreen(item: Int) {
 @Preview
 @Composable
 fun SimpleComposablePreview() {
-    DetailScreen(1)
+    DetailScreen(onClick = {}, "Detail Screen")
 }

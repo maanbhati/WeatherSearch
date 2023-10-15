@@ -28,7 +28,7 @@ fun WeatherListItem(dailyDomain: DailyDomainViewModel, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick },
+            .clickable { onClick() },
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small))
     ) {
         Box(
