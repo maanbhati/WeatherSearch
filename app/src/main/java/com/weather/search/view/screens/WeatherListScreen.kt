@@ -26,12 +26,14 @@ import com.weather.search.utils.getDate
 @Composable
 fun WeatherListItem(dailyDomain: DailyDomainViewModel, onClick: () -> Unit) {
     Card(
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small)),
-        modifier = Modifier.fillMaxWidth().clickable { onClick() }
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick },
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.spacing_small))
     ) {
         Box(
             modifier = Modifier
-                .background(colorResource(id = R.color.color_light_gray))
+                .background(colorResource(id = R.color.teal_200))
                 .fillMaxWidth()
                 .padding(dimensionResource(id = R.dimen.spacing_small))
         ) {

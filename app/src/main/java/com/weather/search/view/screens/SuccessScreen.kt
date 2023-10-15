@@ -2,7 +2,7 @@ package com.weather.search.view.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -11,12 +11,30 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.weather.network.api.Api
 import com.weather.search.R
 import com.weather.search.data.remote.WeatherDomainViewModel
 import com.weather.search.utils.getDate
+
+@Preview
+@Composable
+fun SuccessScreenPreview() {
+    val successContent = WeatherDomainViewModel(
+        123,
+        849242L,
+        "test",
+        324.00,
+        34.00,
+        34.00,
+        "raining",
+        "",
+        listOf()
+    )
+    SuccessScreen(successContent)
+}
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -62,14 +80,17 @@ fun SuccessScreen(successContentState: WeatherDomainViewModel) {
             style = MaterialTheme.typography.body1
         )
         LazyColumn(
+            modifier = Modifier
+                .wrapContentSize(),
             contentPadding = PaddingValues(
-                horizontal = dimensionResource(id = R.dimen.spacing_medium),
-                vertical = dimensionResource(id = R.dimen.spacing_small)
+                dimensionResource(id = R.dimen.spacing_medium)
             ),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.spacing_medium))
         ) {
-            items(items = successContentState.daily) { daily ->
-                WeatherListItem(dailyDomain = daily) {}
+            itemsIndexed(items = successContentState.daily) { index, daily ->
+                WeatherListItem(dailyDomain = daily) {
+                    println("item clicked ${index + 1}")
+                }
             }
         }
     }
