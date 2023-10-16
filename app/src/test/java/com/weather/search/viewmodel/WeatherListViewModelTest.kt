@@ -54,8 +54,6 @@ class WeatherListViewModelTest {
 
     @Test
     fun when_get_saved_weather_called_verify_method_call_from_repository() = runTest {
-        every { runBlocking { repository.getSavedWeather() } } returns flowOf(weatherEntityModel)
-
         viewModel.getSavedWeather()
 
         verify { runBlocking { repository.getSavedWeather() } }
@@ -90,7 +88,7 @@ class WeatherListViewModelTest {
             )
             viewModel.fetchWeatherData(query)
 
-            verify { runBlocking { repository.getFutureWeather(lat.toString(), lon.toString()) } }
+            verify(exactly = 1) { runBlocking { repository.getFutureWeather(lat.toString(), lon.toString()) } }
         }
 
     @Test
