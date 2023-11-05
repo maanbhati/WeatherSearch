@@ -23,15 +23,7 @@ import com.weather.search.utils.getDate
 @Composable
 fun SuccessScreenPreview() {
     val successContent = WeatherDomainViewModel(
-        123,
-        849242L,
-        "test",
-        324.00,
-        34.00,
-        34.00,
-        "raining",
-        "",
-        listOf()
+        123, 849242L, "test", 324.00, 34.00, 34.00, "raining", "", listOf()
     )
     SuccessScreen(navigateToDetailScreen = {}, successContent)
 }
@@ -43,9 +35,7 @@ fun SuccessScreen(
     successContentState: WeatherDomainViewModel
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = successContentState.name,
@@ -56,11 +46,8 @@ fun SuccessScreen(
         )
         Text(
             text = stringResource(
-                R.string.day_temperature,
-                successContentState.temp.toString()
-            ),
-            modifier = Modifier.wrapContentHeight(),
-            style = MaterialTheme.typography.body2
+                R.string.day_temperature, successContentState.temp.toString()
+            ), modifier = Modifier.wrapContentHeight(), style = MaterialTheme.typography.body2
         )
         GlideImage(
             model = Api.FORECAST_ICON.plus(successContentState.icon),
@@ -83,8 +70,7 @@ fun SuccessScreen(
             style = MaterialTheme.typography.body1
         )
         LazyColumn(
-            modifier = Modifier
-                .wrapContentSize(),
+            modifier = Modifier.wrapContentSize(),
             contentPadding = PaddingValues(
                 dimensionResource(id = R.dimen.spacing_medium)
             ),
@@ -92,8 +78,9 @@ fun SuccessScreen(
         ) {
             itemsIndexed(items = successContentState.daily) { index, daily ->
                 WeatherListItem(dailyDomain = daily) {
-                    println("item clicked ${index + 1}")
+                    /* Details Screen is under development
                     navigateToDetailScreen(successContentState.description)
+                     */
                 }
             }
         }
