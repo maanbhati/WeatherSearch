@@ -6,7 +6,7 @@ import com.weather.search.view.navigation.Action
 
 class Screens(navController: NavHostController) {
     val list: (String) -> Unit = { weatherDetail ->
-        navController.navigate(route = "details/$weatherDetail")
+        navController.navigate(route = "details/${weatherDetail}")
     }
 
     val details: (Action) -> Unit = { action ->
