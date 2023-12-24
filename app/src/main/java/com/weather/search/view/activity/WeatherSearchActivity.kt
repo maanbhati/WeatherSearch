@@ -6,16 +6,10 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.weather.search.data.remote.DailyDomainViewModel
-import com.weather.search.data.remote.WeatherDomainViewModel
 import com.weather.search.ui.theme.WeatherSearchTheme
-import com.weather.search.view.screens.SuccessScreen
 import com.weather.search.view.screens.WeatherSearchScreen
 import dagger.hilt.android.AndroidEntryPoint
 
