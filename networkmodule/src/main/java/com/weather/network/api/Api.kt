@@ -15,7 +15,7 @@ interface Api {
         @Query("appid") appId: String = APP_ID
     ): Response<CurrentWeatherResponse>
 
-    @GET("onecall")
+    @GET("forecast")
     suspend fun getFutureWeather(
         @Query("lat") lat: String,
         @Query("lon") lon: String,
