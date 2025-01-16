@@ -27,7 +27,7 @@ interface Api {
     companion object {
         const val EXCLUDE = "current,minutely,hourly"
         const val UNIT_METRIC = "metric"
-        const val APP_ID = "<Your keys goes Here>"
+        const val APP_ID = "5e41b1a7c86700e3ca73ecee6c20d1ba"
         const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
         const val FORECAST_ICON = BASE_URL + "img/w/"
     }
